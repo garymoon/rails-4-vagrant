@@ -65,7 +65,7 @@ echo "Logging command output to $LOG_FILE"
 echo "Updating packages..."
 {
   sudo apt-get update
-  sudo apt-get -y install build-essential zlib1g-dev curl libcurl4-openssl-dev git-core software-properties-common
+  sudo apt-get -y install build-essential zlib1g-dev curl libcurl4-openssl-dev git-core software-properties-common bison
 } >> $LOG_FILE 2>&1
 
 
@@ -147,6 +147,7 @@ bundle install >> $LOG_FILE 2>&1
 echo "Initializing application's database..."
 {
   bundle exec rake db:create
+  bundle exec rake db:migrate
   bundle exec rake db:schema:load
 } >> $LOG_FILE 2>&1
 
